@@ -17,5 +17,5 @@ with sync_playwright() as playwright:
 
     wrong_email_or_pawword_alert = page.get_by_test_id('ErrorOutlineIcon')
     expect(wrong_email_or_pawword_alert).to_be_visible()
-    expect(wrong_email_or_pawword_alert).to_have_text('Wrong email 2 password')
+    expect(wrong_email_or_pawword_alert).to_have_text('Wrong email or password')
     page.wait_for_timeout(5000)
