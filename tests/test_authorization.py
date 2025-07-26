@@ -18,3 +18,5 @@ def test_wrong_email_or_password_authorization(chromium_page: Page):
         wrong_email_or_pawword_alert = chromium_page.get_by_test_id('login-page-wrong-email-or-password-alert')
         expect(wrong_email_or_pawword_alert).to_be_visible()
         expect(wrong_email_or_pawword_alert).to_have_text('Wrong email or password')
+
+
