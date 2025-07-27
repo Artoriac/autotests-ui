@@ -3,38 +3,38 @@ from playwright.sync_api import sync_playwright, Page, Playwright
 
 @pytest.fixture
 def chromium_page(playwright: Playwright) -> Page:
-        browser = playwright.chromium.launch(headless=False)
-        yield browser.new_page()
-        browser.close()
+     browser = playwright.chromium.launch(headless=False)
+     yield browser.new_page()
+     browser.close()
 
 @pytest.fixture(scope='session')
 def initialize_browser_state(playwright: Playwright) -> None:
-        browser = playwright.chromium.launch(headless=False)
-        context = browser.new_context()
-        page = context.new_page()
-        page.goto('https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/auth/registration')
+    browser = playwright.chromium.launch(headless=False)
+    context = browser.new_context()
+    page = context.new_page()
+    page.goto('https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/auth/registration')
 
-        email_field = page.get_by_test_id('registration-form-email-input').locator('input')
-        email_field.fill('user.name_arto@gmail.com')
+    email_field = page.get_by_test_id('registration-form-email-input').locator('input')
+    email_field.fill('user.name_arto@gmail.com')
 
-        username_field = page.get_by_test_id('registration-form-username-input').locator('input')
-        username_field.fill('username_arto')
+    username_field = page.get_by_test_id('registration-form-username-input').locator('input')
+    username_field.fill('username_arto')
 
-        password_field = page.get_by_test_id('registration-form-password-input').locator('input')
-        password_field.fill('password123!')
+    password_field = page.get_by_test_id('registration-form-password-input').locator('input')
+    password_field.fill('password123!')
 
-        registration_button = page.get_by_test_id('registration-page-registration-button')
-        registration_button.click()
+    registration_button = page.get_by_test_id('registration-page-registration-button')
+    registration_button.click()
 
-        context.storage_state(path='browser-state-for-courses.json')
+    context.storage_state(path='browser-state-for-courses.json')
 
-@pytest.fixture(scope='function')
+@pytest.fixture
 def chromium_page_with_state(initialize_browser_state, playwright:Playwright) -> Page:
-        browser = playwright.chromium.launch(headless=False)
-        BrowserContext  = browser.new_context(storage_state='browser-state-for-courses.json')
-        page = BrowserContext.new_page()
-        yield page
-        BrowserContext.close()
-        browser.close()
+    browser = playwright.chromium.launch(headless=False)
+    browser_context  = browser.new_context(storage_state='browser-state-for-courses.json')
+    page = browser_context.new_page()
+    yield page
+    browser_context.close()
+    browser.close()
 
 

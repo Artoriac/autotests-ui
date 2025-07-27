@@ -4,19 +4,19 @@ import  pytest
 @pytest.mark.regression
 @pytest.mark.registration
 def test_successful_registration(chromium_page: Page):
-        chromium_page.goto('https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/auth/registration')
+    chromium_page.goto('https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/auth/registration')
 
-        email_field = chromium_page.get_by_test_id('registration-form-email-input').locator('input')
-        email_field.fill('user.name_arto@gmail.com')
+    email_field = chromium_page.get_by_test_id('registration-form-email-input').locator('input')
+    email_field.fill('user.name_arto@gmail.com')
 
-        username_field = chromium_page.get_by_test_id('registration-form-username-input').locator('input')
-        username_field.fill('username_arto')
+    username_field = chromium_page.get_by_test_id('registration-form-username-input').locator('input')
+    username_field.fill('username_arto')
 
-        password_field = chromium_page.get_by_test_id('registration-form-password-input').locator('input')
-        password_field.fill('password123!')
+    password_field = chromium_page.get_by_test_id('registration-form-password-input').locator('input')
+    password_field.fill('password123!')
 
-        registration_button = chromium_page.get_by_test_id('registration-page-registration-button')
-        registration_button.click()
+    registration_button = chromium_page.get_by_test_id('registration-page-registration-button')
+    registration_button.click()
 
-        dashboard_title = chromium_page.get_by_test_id('dashboard-toolbar-title-text')
-        expect(dashboard_title).to_be_visible('Dashboard')
+    dashboard_title = chromium_page.get_by_test_id('dashboard-toolbar-title-text')
+    expect(dashboard_title).to_be_visible('Dashboard')
