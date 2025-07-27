@@ -27,14 +27,11 @@ def initialize_browser_state(playwright: Playwright) -> None:
     registration_button.click()
 
     context.storage_state(path='browser-state-for-courses.json')
+    browser.close()
 
 @pytest.fixture
 def chromium_page_with_state(initialize_browser_state, playwright:Playwright) -> Page:
     browser = playwright.chromium.launch(headless=False)
-    browser_context  = browser.new_context(storage_state='browser-state-for-courses.json')
-    page = browser_context.new_page()
-    yield page
-    browser_context.close()
+    context  = browser.new_context(storage_state='browser-state-for-courses.json')
+    yield context.page()
     browser.close()
-
-
