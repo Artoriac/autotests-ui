@@ -3,7 +3,7 @@ import  pytest
 
 @pytest.mark.regression
 @pytest.mark.courses
-def test_empty_courses_list(chromium_page_with_state: Page) -> None:
+def test_empty_courses_list(chromium_page_with_state: Page):
     chromium_page_with_state.goto('https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/courses')
 
     courses_header = chromium_page_with_state.get_by_test_id('courses-list-toolbar-title-text')
