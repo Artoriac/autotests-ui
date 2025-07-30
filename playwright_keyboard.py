@@ -1,5 +1,5 @@
 from playwright.sync_api import sync_playwright
-from time import  sleep
+from time import sleep
 
 with sync_playwright() as playwright:
     browser = playwright.chromium.launch(headless=False)
@@ -11,8 +11,8 @@ with sync_playwright() as playwright:
     email_input.focus()
 
     for character in "user@gmail.com":
-        page.keyboard.press(character, delay=300)
+        page.keyboard.press(character,delay=300)
 
-    page.keyboard.press("ControlOrMeta+A")
+    page.keyboard.press('ControlOrMeta+A')
 
     page.wait_for_timeout(5000)
