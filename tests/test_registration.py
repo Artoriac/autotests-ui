@@ -1,22 +1,14 @@
 from playwright.sync_api import sync_playwright,expect, Page
 import  pytest
+from pages.registration_page import RegistrationPage
+from pages.dashboard_page import DashboardPage
 
 @pytest.mark.regression
 @pytest.mark.registration
-def test_successful_registration(chromium_page: Page):
-    chromium_page.goto('https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/auth/registration')
-
-    email_field = chromium_page.get_by_test_id('registration-form-email-input').locator('input')
-    email_field.fill('user.name_arto@gmail.com')
-
-    username_field = chromium_page.get_by_test_id('registration-form-username-input').locator('input')
-    username_field.fill('username_arto')
-
-    password_field = chromium_page.get_by_test_id('registration-form-password-input').locator('input')
-    password_field.fill('password123!')
-
-    registration_button = chromium_page.get_by_test_id('registration-page-registration-button')
-    registration_button.click()
-
-    dashboard_title = chromium_page.get_by_test_id('dashboard-toolbar-title-text')
-    expect(dashboard_title).to_be_visible()
+def test_successful_registration(registration_page: RegistrationPage, dashboard_page: DashboardPage):
+    registration_page.visit('https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/auth/registration')
+    registration_page.fill_registration_form_email_field()
+    registration_page.fill_registration_form_username_field()
+    registration_page.fill_registration_form_password_field()
+    registration_page.click_registration_button()
+    dashboard_page.expect_dashboard_title()
