@@ -1,4 +1,4 @@
-import  pytest
+import pytest
 
 @pytest.mark.xfail(reason="Найден баг в приложении, из-за которого тест не проходит")
 def test_with_bug():
