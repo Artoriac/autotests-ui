@@ -73,7 +73,7 @@ class CoursesListPage(BasePage):
 
         expect(self.course_estimated_time_text.nth(params.index)).to_be_visible()
         expect(self.course_estimated_time_text.nth(params.index)).to_have_text(
-            f'Min score: {params.estimated_time}'
+            f'Estimated time: {params.estimated_time}'
         )
 
     def visible_edit_icon(self, index: int):

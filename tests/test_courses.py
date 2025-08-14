@@ -1,8 +1,11 @@
 from playwright.sync_api import expect, Page
 import  pytest
-import time
+
 from pages.create_course_page import CreateCoursePage
 from pages.courses_list_page import CoursesListPage
+from pages.courses_list_page import CheckVisibleCoursesParams
+
+
 
 @pytest.mark.regression
 @pytest.mark.courses
@@ -51,7 +54,15 @@ def test_create_course(create_course_page: CreateCoursePage, courses_list_page: 
     )
     create_course_page.click_create_course_button()
 
-
     courses_list_page.check_visible_courses_title()
-    courses_list_page.check_visible_create_courses_button()
-    courses_list_page.check_visible_course_card()
+    courses_list_page.check_visible_create_course_button()
+    courses_list_page.check_visible_course_card(
+        CheckVisibleCoursesParams(
+            index=0,
+            title='Playwright',
+            max_score='100',
+            min_score='10',
+            estimated_time='2 weeks'
+        )
+    )
+
