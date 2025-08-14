@@ -49,11 +49,11 @@ class CoursesListPage(BasePage):
             'Results from the load test pipeline will be displayed here'
         )
 
-    def check_visible_create_courses_button(self):
+    def check_visible_create_course_button(self):
         expect(self.create_courses_button).to_be_visible()
 
     def click_create_course_button(self):
-        expect(self.create_courses_button).to_be_visible()
+        self.create_courses_button.click()
 
     def check_visible_course_card(self, params: CheckVisibleCoursesParams):
         expect(self.course_image.nth(params.index)).to_be_visible()
