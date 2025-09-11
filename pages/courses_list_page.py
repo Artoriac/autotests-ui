@@ -1,6 +1,8 @@
 from playwright.sync_api import Page, expect
 from dataclasses import dataclass
 
+from components.coursepage.course_component import CreateCourseFormComponent
+from components.navigation.SidebarComponent import SidebarComponent
 from pages.base_page import BasePage
 
 @dataclass
@@ -14,6 +16,11 @@ class CheckVisibleCoursesParams:
 class CoursesListPage(BasePage):
     def __init__(self, page: Page):
         super().__init__(page)
+        self.page = page
+        self.create_course_form =CreateCourseFormComponent(self.page)
+        self.sidebar = SidebarComponent(page)
+        self.create_courses_button = self.page.get_by_test_id('create-course-button')
+
 
         self.courses_title = page.get_by_test_id('courses-list-toolbar-title-text')
         self.create_courses_button = page.get_by_test_id('courses-list-toolbar-create-course-button')
@@ -33,6 +40,11 @@ class CoursesListPage(BasePage):
         self.course_edit_button = page.get_by_test_id('course-view-edit-menu-item-text')
         self.course_delete_icon = page.get_by_test_id('DeleteOutlineOutlinedIcon')
         self.course_delete_button = page.get_by_test_id('course-view-delete-menu-item-text')
+
+        self.courses_title = page.get_by_test_id('courses-list-toolbar-title-text')
+        self.empty_view_icon = page.get_by_test_id('courses-list-empty-view-icon')
+        self.empty_view_title = page.get_by_test_id('courses-list-empty-view-title-text')
+        self.empty_view_description = page.get_by_test_id('courses-list-empty-view-description-text')
 
     def check_visible_courses_title(self):
         expect(self.courses_title).to_be_visible()

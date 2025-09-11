@@ -28,14 +28,14 @@ with sync_playwright() as playwright:
 
     page.goto('https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/courses')
 
-    courses_header = page.get_by_test_id('courses-list-toolbar-title-text')
-    expect(courses_header).to_have_text('Courses')
+    courses_title = page.get_by_test_id('courses-list-toolbar-title-text')
+    expect(courses_title).to_have_text('Courses')
 
-    file_icon = page.get_by_test_id('courses-list-empty-view-icon')
-    expect(file_icon).to_be_visible()
+    empty_view_icon = page.get_by_test_id('courses-list-empty-view-icon')
+    expect(empty_view_icon).to_be_visible()
 
-    title_no_result = page.get_by_test_id('courses-list-empty-view-title-text')
-    expect(title_no_result).to_have_text('There is no results')
+    empty_view_title  = page.get_by_test_id('courses-list-empty-view-title-text')
+    expect(empty_view_title ).to_have_text('There is no results')
 
-    block_no_result = page.get_by_test_id('courses-list-empty-view-description-text')
-    expect(block_no_result).to_have_text('Results from the load test pipeline will be displayed here')
+    empty_view_description  = page.get_by_test_id('courses-list-empty-view-description-text')
+    expect(empty_view_description ).to_have_text('Results from the load test pipeline will be displayed here')
