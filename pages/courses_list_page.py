@@ -4,6 +4,7 @@ from dataclasses import dataclass
 from components.coursepage.course_component import CreateCourseFormComponent
 from components.navigation.SidebarComponent import SidebarComponent
 from components.navigation.navbar_component import NavbarComponent
+from components.views.empty_view_component import EmptyViewComponent
 from pages.base_page import BasePage
 
 @dataclass
@@ -23,13 +24,12 @@ class CoursesListPage(BasePage):
         self.sidebar = SidebarComponent(page)
         self.create_courses_button = self.page.get_by_test_id('create-course-button')
 
+        self.empty_view = EmptyViewComponent(page, 'courses-list-empty-view')
+
 
         self.courses_title = page.get_by_test_id('courses-list-toolbar-title-text')
         self.create_courses_button = page.get_by_test_id('courses-list-toolbar-create-course-button')
 
-        self.empty_view_icon = page.get_by_test_id('courses-list-empty-view-icon')
-        self.empty_view_title = page.get_by_test_id('courses-list-empty-view-title-text')
-        self.empty_view_description = page.get_by_test_id('courses-list-empty-view-description-text')
 
         self.course_title = page.get_by_test_id('course-widget-title-text')
         self.course_image = page.get_by_test_id('course-preview-image')
@@ -49,14 +49,9 @@ class CoursesListPage(BasePage):
         expect(self.courses_title).to_have_text('Courses')
 
     def check_visible_empty_view(self):
-        expect(self.empty_view_icon).to_be_visible()
-
-        expect(self.empty_view_title).to_be_visible()
-        expect(self.empty_view_title).to_have_text('There is no results')
-
-        expect(self.empty_view_description).to_be_visible()
-        expect(self.empty_view_description).to_have_text(
-            'Results from the load test pipeline will be displayed here'
+        self.empty_view.check_visible(
+            title='There is no results',
+            description='Results from the load test pipeline will be displayed here',
         )
 
     def check_visible_create_course_button(self):
