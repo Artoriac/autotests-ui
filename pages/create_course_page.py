@@ -1,5 +1,5 @@
 from playwright.sync_api import Page, expect
-
+from components.views.empty_view_component import EmptyViewComponent
 from pages.base_page import BasePage
 
 
@@ -9,7 +9,7 @@ class CreateCoursePage(BasePage):
 
         self.navbar = self.NavbarComponent(page)
         self.preview_empty_view = EmptyViewComponent(page, 'create-course-preview')
-        self.exercises_empty_view = EmptyViewComponent(page, 'create-course-exercises-empty-view')
+        self.exercises_empty_view = EmptyViewComponent(page, 'create-course-exercises')
 
         self.create_course_title = page.get_by_test_id('create-course-toolbar-title-text')
         self.create_course_button = page.get_by_test_id('create-course-toolbar-create-course-button')
