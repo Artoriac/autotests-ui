@@ -1,13 +1,16 @@
 from playwright.sync_api import Page, expect
-from components.views.empty_view_component import EmptyViewComponent
-from pages.base_page import BasePage
 
+from pages.base_page import BasePage
+from components.views.empty_view_component import EmptyViewComponent
+from components.navigation.navbar_component import NavbarComponent
+from components.courses.courses_list_toolbar_view_component import CourseListToolbarViewComponent
 
 class CreateCoursePage(BasePage):
     def __init__(self,page: Page):
         super().__init__(page)
 
-        self.navbar = self.NavbarComponent(page)
+        self.navbar = NavbarComponent(page)
+        self.toolbar_view = CourseListToolbarViewComponent(page)
         self.preview_empty_view = EmptyViewComponent(page, 'create-course-preview')
         self.exercises_empty_view = EmptyViewComponent(page, 'create-course-exercises')
 
@@ -61,7 +64,7 @@ class CreateCoursePage(BasePage):
     def check_visible_image_preview_empty_view(self):
         self.preview_empty_view.check_visible(
             title='No image selected',
-            desription='Preview of selected image will be displayed here'
+            description='Preview of selected image will be displayed here'
         )
 
     def check_visible_image_upload_view(self, is_image_uploaded: bool = False):
@@ -148,7 +151,7 @@ class CreateCoursePage(BasePage):
     def check_visible_exercises_empty_view(self):
         self.exercises_empty_view.check_visible(
             title='There is no exercises',
-            desription='Click on "Create exercise" button to create new exercise'
+            description='Click on "Create exercise" button to create new exercise'
         )
 
     def click_delete_exercise_button(self, index: int):
@@ -190,5 +193,4 @@ class CreateCoursePage(BasePage):
 
         exercise_description_input.fill(description)
         expect(exercise_description_input).to_have_value(description)
-
 

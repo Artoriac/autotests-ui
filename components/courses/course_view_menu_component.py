@@ -1,4 +1,5 @@
 from components.base_component import BaseComponent
+
 from playwright.async_api import Page, expect
 
 class CourseViewMenuComponent(BaseComponent):
@@ -12,13 +13,11 @@ class CourseViewMenuComponent(BaseComponent):
     def click_edit(self, index: int):
         self.menu_button.nth(index).click()
 
-
         expect(self.edit_menu_button.nth(index)).to_be_visible()
         self.edit_menu_button.nth(index).click()
 
     def click_delete(self, index: int):
         self.menu_button.nth(index).click()
-
 
         expect(self.delete_menu_button.nth(index)).to_be_visible()
         self.delete_menu_button.nth(index).click()
